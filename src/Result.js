@@ -57,12 +57,10 @@ import {
                             <td>{value.phone}</td>
                             <td>
                                 {Object.keys(value.questions).map(function(key, index) {
-                                  
                                   return <div>
-                                              <b>{index+1}. {key}</b>
-                                              <p>{Array.isArray(value.questions[key]) ? value.questions[key].filter(function(value, index, arr){ return value=="";}).join(", "):value.questions[key]}</p>
-                                          </div>
-                                    
+                                      <b>{index+1}. {key}</b>
+                                      <p>{Array.isArray(value.questions[key]) ? value.questions[key].filter(function(val, ind, arr){ return val!="";}).join(", "):value.questions[key]}</p>
+                                  </div>
                                 })}
                             </td>     
                           </tr>
