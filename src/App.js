@@ -10,12 +10,20 @@ import ResultList from './ResultList'
 import Result from './Result'
 import Login from './Login'
 import CreateAccount from './CreateAccount'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route, HashRouter
+} from "react-router-dom";
 function App() {
   return (
     <div className="App">
-        <Router basename="/">
+        
+
+        
+
+        <Router basename={process.env.PUBLIC_URL}>
           <Route path="/create" component={Create}/>
           <Route path="/survey" component={Survey}/>
           <Route path="/result" component={Result}/>
