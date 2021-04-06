@@ -15,7 +15,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom'
 function App() {
   return (
     <div className="App">
-        <Router basename={process.env.PUBLIC_URL}>
+        <Router basename="/">
           <Route path="/create" component={Create}/>
           <Route path="/survey" component={Survey}/>
           <Route path="/result" component={Result}/>
