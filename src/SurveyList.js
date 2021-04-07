@@ -66,7 +66,7 @@ import {
               
                 <div >
                 <br></br>
-                <h1 className="display-4">Choose a survey to take</h1>
+                <h1 className="display-4">&nbsp;Choose a survey to take</h1>
                 
                 <ol style={{fontSize : '25px'}}>
                   <table>

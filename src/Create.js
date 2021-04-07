@@ -81,8 +81,8 @@ function Create() {
   return (
     <div className="App">
       <MyNavbar />
-      <Container fluid>
-        <Row>
+      <Container fluid >
+        <Row style={{minHeight : '100vh'}}>
           <Col md={2} style={{backgroundColor : '#d0dbd3',  position: '-webkit-sticky', position: 'sticky', top: 0}}>
             <br></br>
             <Button color="info" style={{width : '100%'}} onClick={() => addQuiz()}> <FontAwesomeIcon icon={faCheckCircle} /> Add Quiz</Button>
