@@ -48,9 +48,9 @@ import {
   
   
     return (
-      <div className="App" style={{height: '90vh'}}>
+      <div className="App" style={{height: '100vh'}}>
         <MyNavbar/>
-        <div className=" h-100 d-flex justify-content-center align-items-center">   
+        <div className=" h-100 d-flex justify-content-center align-items-center" style={{backgroundColor : '#66CDAA'}}>   
           <Card >
               <CardBody>
               <CardTitle tag="h5">Login to your account</CardTitle>

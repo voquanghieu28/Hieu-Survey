@@ -91,14 +91,14 @@ function Survey() {
       <Container fluid>
         <Form method="POST" action="https://survey-hieu.herokuapp.com/survey">
         <Row>
-          <Col md={2} style={{backgroundColor : '#d0dbd3', height : '100vh', position: '-webkit-sticky', position: 'sticky', top: 0}}>
+          <Col md={2} style={{backgroundColor : '#d0dbd3',    top: 0}}>
                 <center>
                     <br></br>
-                <h4>Time remaining</h4>
+                <h4>Time taken</h4>
                 <h2><label id="min">00</label>:<label id="sec">00</label></h2>
                 </center>
                 <Button type="submit" color="primary" style={{width : '100%', bottom: '10px'}}>Submit Survey</Button>
-                
+                <br></br><br></br>
           </Col>
           <Col md={10}>
 

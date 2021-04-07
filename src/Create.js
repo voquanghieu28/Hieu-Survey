@@ -83,7 +83,7 @@ function Create() {
       <MyNavbar />
       <Container fluid>
         <Row>
-          <Col md={2} style={{backgroundColor : '#d0dbd3', height : '100vh', position: '-webkit-sticky', position: 'sticky', top: 0}}>
+          <Col md={2} style={{backgroundColor : '#d0dbd3',  position: '-webkit-sticky', position: 'sticky', top: 0}}>
             <br></br>
             <Button color="info" style={{width : '100%'}} onClick={() => addQuiz()}> <FontAwesomeIcon icon={faCheckCircle} /> Add Quiz</Button>
             <hr></hr>
@@ -101,7 +101,7 @@ function Create() {
           <Col md={10} style={{backgroundColor : '#e9ebf0'}}>
             <Form id ="create-form"method="POST" action="https://survey-hieu.herokuapp.com/home">
               <br></br>
-              <h2>Create survey dashboard</h2>
+              <h2 className="display-4">Create survey dashboard</h2>
               <br></br>
               <FormGroup row>
                 <Label for="name" sm={2}><h5>Survey title:</h5></Label>

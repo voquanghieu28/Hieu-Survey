@@ -40,7 +40,7 @@ import {
             <FormGroup row>
                 
              
-                <Input style={{marginLeft:'20px',marginRight:'20px'}}type="range" name={`questions[${props.name}]`} id="exampleRange" />
+                <Input style={{marginLeft:'20px',marginRight:'20px'}} type="range" name={`questions[${props.name}]`} id="exampleRange" />
           
             </FormGroup>
               

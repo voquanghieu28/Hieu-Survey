@@ -42,15 +42,12 @@ import {
     return (
       <div className="App">
         <MyNavbar />
-  
-        <Container fluid>
+        <div style={{height : '100vh', backgroundColor : '#00CED1'}}>
+        <Container style={{height : '100vh', backgroundColor : 'white'}}>
           <Row>
-            <Col md={4} style={{backgroundColor : '#d0dbd3', height : '100vh', position: '-webkit-sticky', position: 'sticky', top: 0}}>
-                  
-                  
-            </Col>
-            <Col md={8}>
-              <div style={{marginLeft : '20px'}}>
+            
+           
+              <div>
               <br></br>
               <h1 className="display-4">Choose a survey to view result</h1>
               
@@ -69,9 +66,10 @@ import {
                 </table>
               </ol>
               </div>
-            </Col>
+           
           </Row>
         </Container>
+        </div>
       </div>
     );
   }
