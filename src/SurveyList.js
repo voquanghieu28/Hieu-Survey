@@ -70,16 +70,16 @@ import {
                 
                 <ol style={{fontSize : '25px'}}>
                   <table>
-                  {survey.map((value, index) => {  
-                    return  <tr>
-                              <td>
-                                <a href={window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/survey?id=' + value._id}>{index+1}. {value.name}   </a>
-                              </td> 
-                              <td style={{fontSize : '15px'}}>
-                                <i>&nbsp;&nbsp;&nbsp;&nbsp;({new Date(value.created).toDateString()})</i>
-                              </td>
-                            </tr>
-                  })}
+                    {survey.map((value, index) => {  
+                      return  <tr>
+                                <td>
+                                  <a href={window.location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/survey?id=' + value._id}>{index+1}. {value.name}   </a>
+                                </td> 
+                                <td style={{fontSize : '15px'}}>
+                                  <i>&nbsp;&nbsp;&nbsp;&nbsp;({new Date(value.created).toDateString()})</i>
+                                </td>
+                              </tr>
+                    })}
                   </table>
                 </ol>
                 </div>

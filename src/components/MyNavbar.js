@@ -32,6 +32,9 @@ function MyNavBar() {
               <NavLink href="/create">Create survey</NavLink>
             </NavItem>
             <NavItem>
+              <NavLink href="/edit-survey">Edit survey</NavLink>
+            </NavItem>
+            <NavItem>
               <NavLink href="/survey-list">Survey list</NavLink>
             </NavItem>
             <NavItem>
