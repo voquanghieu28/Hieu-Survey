@@ -1,8 +1,13 @@
+/***********************************************************************************
+* Author:         QUANG HIEU VO
+* Date:           April 10, 2021     
+* Assignment:     Culmination project, COIS 3420H Winter 2021
+* Parameters:     N/A
+* References:     N/A
+* Revisions:      N/A
+************************************************************************************/
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-
-
-
 import Create from './Create'
 import Survey from './Survey'
 import SurveyList from './SurveyList'
@@ -11,12 +16,8 @@ import EditSurvey from './EditSurvey'
 import Result from './Result'
 import Login from './Login'
 import CreateAccount from './CreateAccount'
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route, HashRouter
-} from "react-router-dom";
 function App() {
   return (
     <div className="App">
@@ -29,7 +30,6 @@ function App() {
           <Route path="/(result-list|)" component={ResultList}/>            
           <Route path="/login" component={Login}/> 
           <Route path="/create-account" component={CreateAccount}/> 
-
         </Router>
     </div>
   );
