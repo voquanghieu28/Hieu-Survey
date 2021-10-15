@@ -10,6 +10,7 @@ import { Container, Row } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import MyNavbar from "./components/MyNavbar";
+import Typewriter from "typewriter-effect";
 
 /** SURVEY LIST PAGE */
 function SurveyList() {
@@ -49,8 +50,9 @@ function SurveyList() {
         style={{
           backgroundColor: "#e9ebf0",
           boxShadow: "inset 5px 1px 15px -8px",
-          backgroundImage: `url("https://images.unsplash.com/photo-1455246772632-66ab9b08e20c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=MnwxfDB8MXxyYW5kb218MHx8bW91bnRhaW58fHx8fHwxNjM0MjU1MTQz&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1700&h=800")`,
+          backgroundImage: `url("https://images.unsplash.com/photo-1455246772632-66ab9b08e20c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixid=MnwxfDB8MXxyYW5kb218MHx8bW91bnRhaW58fHx8fHwxNjM0MjU1MTQz&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=2000&h=900")`,
           backgroundAttachment: "fixed",
+          boxShadow: "1px 9px  25px -5px",
         }}
       >
         <div className="container">
@@ -66,25 +68,44 @@ function SurveyList() {
                 paddingTop: 20,
                 paddingBottom: 20,
               }}
+              className="shadow"
             >
-              Took our survey to have a chance to win 500$
+              <Typewriter
+                onInit={(typewriter) => {
+                  typewriter
+
+                    .typeString("Welcom to Survey Rabbit!")
+
+                    .pauseFor(1000)
+                    .deleteAll()
+                    .typeString("Took our survey to have a chance to win 500$")
+                    .start();
+                }}
+                typeSpeed={30}
+              />
             </div>
           </h1>
         </div>
       </section>
 
-      <Container style={{ height: "100vh", backgroundColor: "white" }}>
+      <Container
+        style={{
+          height: "100vh",
+          backgroundColor: "white",
+        }}
+      >
         {/** Render list of surveys */}
         <div className="row">
           {survey.map((value, index) => {
             return (
               <div className="col-sm-4 col-md-4 col-lg-4">
-                <div className="card mb-4 box-shadow">
+                <div className="card mb-4 box-shadow shadow custom-card">
                   <img
                     className="card-img-top"
                     src={"https://source.unsplash.com/1600x900/?" + index}
                     alt="Card image cap"
                   />
+
                   <div className="card-body">
                     <h3 style={{ fontSize: 25, fontWeight: 350 }}>
                       {value.name}

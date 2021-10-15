@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "font-awesome/css/font-awesome.min.css";
 
-import { faBell } from "@fortawesome/free-regular-svg-icons";
+import { faCarrot } from "@fortawesome/free-solid-svg-icons";
 
 //import { Button } from 'bootstrap';
 
@@ -25,7 +25,7 @@ function MyNavBar() {
     <div className="App">
       <Navbar color="light" light expand="md" className="bg-dark navbar-dark ">
         <NavbarBrand href="/survey-list">
-          SURVEY RABBIT <FontAwesomeIcon icon={faBell} />
+          SURVEY RABBIT <FontAwesomeIcon icon={faCarrot} />
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>

@@ -12,7 +12,7 @@ import React, { useState, useEffect } from "react";
 import MyNavbar from "./components/MyNavbar";
 
 /** EDIT SURVEY PAGE */
-function ResultList() {
+function Statistic() {
   /** Storing page variables*/
   const [survey, setSurvey] = useState([]);
   const [error, setError] = useState(null);
@@ -67,7 +67,7 @@ function ResultList() {
                   className="jumbotron-heading "
                   style={{ fontSize: 60, fontWeight: 300 }}
                 >
-                  &nbsp;&nbsp;&nbsp;View survey results
+                  &nbsp;&nbsp;&nbsp;Statistic
                 </h1>
                 <br></br>
                 <br></br>
@@ -101,7 +101,7 @@ function ResultList() {
                               window.location.hostname +
                               ":" +
                               window.location.port +
-                              "/result?id=" +
+                              "/statistic-result?id=" +
                               value._id
                             }
                           >
@@ -126,6 +126,6 @@ function ResultList() {
   );
 }
 
-export default ResultList;
+export default Statistic;
 
 /** END OF FILE */
