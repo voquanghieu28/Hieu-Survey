@@ -11,16 +11,41 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import MyNavbar from "./components/MyNavbar";
-import { Row } from "reactstrap";
+import { Row, Col } from "reactstrap";
+import {
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 /** RESULT PAGE */
 function Result() {
   /** Storing page variables */
   const [results, setResults] = useState([]);
+  const [questions, setQuestions] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const search = useLocation().search;
   const idParam = new URLSearchParams(search).get("id");
-
+  const data = [
+    {
+      name: "Page A",
+      uv: 6,
+    },
+    {
+      name: "Page B",
+      uv: 5,
+    },
+    {
+      name: "Page C",
+      uv: 1,
+    },
+  ];
   /** Fetch api to get survey lists */
   useEffect(() => {
     fetch("https://survey-hieu.herokuapp.com/result?id=" + idParam)
@@ -28,6 +53,20 @@ function Result() {
       .then(
         (result) => {
           setResults(result); // If there is result then set the result
+          console.log(result);
+
+          fetch("https://survey-hieu.herokuapp.com/api?id=" + idParam)
+            .then((res) => res.json())
+            .then(
+              (result2) => {
+                //setResults(result); // If there is result then set the result
+                console.log(result2.questions);
+                setQuestions(result2.questions);
+              },
+              (error) => {
+                setIsLoaded(true); // If there is error then set error message
+              }
+            );
         },
         (error) => {
           setIsLoaded(true); // If there is error then set error message
@@ -68,10 +107,42 @@ function Result() {
                 </h1>
                 <br></br>
                 <br></br>
+
                 <div style={{ width: "78%" }}>
-                  <p style={{ fontSize: "20px" }}>
-                    &#10054; <i> Select a survey to view result</i>
-                  </p>
+                  <Row>
+                    {questions.map((value, index) => {
+                      return (
+                        <Col sm={6} md={6} lg={6}>
+                          {(value.type == "quiz") | (value.type == "multi") ? (
+                            <div>
+                              <h5>
+                                {index + 1}. {value.name}
+                              </h5>
+                              <BarChart
+                                width={400}
+                                height={300}
+                                data={data}
+                                margin={{
+                                  top: 5,
+                                  right: 0,
+                                  left: 0,
+                                  bottom: 5,
+                                }}
+                              >
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip />
+                                <Legend />
+
+                                <Bar dataKey="uv" fill="#82ca9d" />
+                              </BarChart>
+                            </div>
+                          ) : null}
+                        </Col>
+                      );
+                    })}
+                  </Row>
                 </div>
               </div>
             </Row>

@@ -28,7 +28,24 @@ function ResultList() {
           setIsLoaded(true);
           setSurvey(result);
           //setState(result);
-          console.log(survey);
+
+          result.forEach(function (item, index) {
+            fetch("https://survey-hieu.herokuapp.com/result?id=" + item._id)
+              .then((res) => res.json())
+              .then(
+                (result2) => {
+                  var newSurvey = result;
+                  newSurvey[index] = {
+                    ...result[index],
+                    userTaken: result2.length,
+                  };
+                  setSurvey([...newSurvey]);
+                },
+                (error) => {
+                  setIsLoaded(true); // If there is error then set error message
+                }
+              );
+          });
         },
         // If there is error then set error message
         (error) => {
@@ -112,7 +129,7 @@ function ResultList() {
                           &nbsp;&nbsp;&nbsp;&nbsp;(
                           {new Date(value.created).toDateString()})
                         </td>
-                        <td>{Math.floor(Math.random() * 10) + 5}</td>
+                        <td>{value.userTaken}</td>
                       </tr>
                     );
                   })}

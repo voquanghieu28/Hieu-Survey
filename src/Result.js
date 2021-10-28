@@ -6,11 +6,32 @@
  * References:     N/A
  * Revisions:      N/A
  ************************************************************************************/
-import { Container, Table } from "reactstrap";
+import {
+  Container,
+  Table,
+  FormGroup,
+  Label,
+  Input,
+  FormFeedback,
+  FormText,
+  Col,
+  Button,
+} from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import MyNavbar from "./components/MyNavbar";
+import {
+  faSearch,
+  faSortNumericDown,
+  faMailBulk,
+  faPhone,
+  faQuestion,
+  faFilePdf,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactToPdf from "react-to-pdf";
 
 /** RESULT PAGE */
 function Result() {
@@ -19,7 +40,8 @@ function Result() {
   const [isLoaded, setIsLoaded] = useState(false);
   const search = useLocation().search;
   const idParam = new URLSearchParams(search).get("id");
-
+  const [searchValue, setSearchValue] = useState("");
+  const ref = React.createRef();
   /** Fetch api to get survey lists */
   useEffect(() => {
     fetch("https://survey-hieu.herokuapp.com/result?id=" + idParam)
@@ -27,6 +49,7 @@ function Result() {
       .then(
         (result) => {
           setResults(result); // If there is result then set the result
+          setDisplayResults(result);
         },
         (error) => {
           setIsLoaded(true); // If there is error then set error message
@@ -34,6 +57,21 @@ function Result() {
       );
   }, []);
 
+  const [displayResults, setDisplayResults] = useState([]);
+  const onChangeText = (text) => {
+    setSearchValue(text);
+    var filteredResults;
+
+    if (text.length == 0) filteredResults = results;
+    else
+      filteredResults = results.filter((element) => {
+        return element.email.toLowerCase().includes(text.toLowerCase());
+      });
+
+    setDisplayResults(filteredResults);
+  };
+
+  const foo = [];
   /** Rendering page */
   return (
     <div className="App">
@@ -45,9 +83,86 @@ function Result() {
           backgroundAttachment: "fixed",
         }}
       >
-        <Container classNam="container-md" style={{ minHeight: "100vh" }}>
+        <Container style={{ minHeight: "100vh" }} fluid>
           <br></br>
-          <br></br>
+
+          <div className="float-right" style={{ height: "70px" }}>
+            <div
+              className="card mb-4 "
+              style={{
+                backgroundColor: "rgba(255,255,255,0.65)",
+                width: "650px",
+                minHeight: "10px",
+                //marginTop: "8vh",
+                alignItems: "right",
+                padding: "10px",
+                paddingTop: "14px",
+                paddingBottom: "2px",
+                paddingLeft: 10,
+                paddingRight: 10,
+              }}
+            >
+              <FormGroup row style={{ width: "650px" }}>
+                <Label for="exampleEmail" sm={3} style={{ fontSize: "15px" }}>
+                  <FontAwesomeIcon icon={faSearch} />
+                  &nbsp;Search by email:
+                </Label>
+                <Col sm={6}>
+                  <Input
+                    id="exampleEmail"
+                    name="email"
+                    placeholder="john@gmail.com"
+                    type="email"
+                    value={searchValue}
+                    onChange={(e) => {
+                      onChangeText(e.target.value);
+                    }}
+                  />
+                </Col>
+                <Col sm={3}>
+                  <ReactToPdf
+                    targetRef={ref}
+                    filename="answers.pdf"
+                    scale={0.52}
+                  >
+                    {({ toPdf }) => (
+                      <Button
+                        style={{ width: "100%", fontSize: "14px" }}
+                        color="danger"
+                        onClick={toPdf}
+                      >
+                        <FontAwesomeIcon icon={faFilePdf} />
+                        &nbsp;Export to PDF
+                      </Button>
+                    )}
+                  </ReactToPdf>
+                </Col>
+              </FormGroup>
+            </div>
+          </div>
+
+          <div
+            className="card mb-4 "
+            style={{
+              backgroundColor: "rgba(255,255,255,0.65)",
+              width: "250px",
+              minHeight: "10px",
+              //marginTop: "8vh",
+              alignItems: "right",
+              padding: "10px",
+              paddingTop: "14px",
+              paddingBottom: "2px",
+              paddingLeft: 10,
+              paddingRight: 10,
+              color: "green",
+            }}
+          >
+            <h2>
+              <FontAwesomeIcon icon={faUser} />
+              &nbsp;5 users taken
+            </h2>
+          </div>
+
           {results.length == 0 ? (
             <div
               style={{ color: "#990000" }}
@@ -63,46 +178,105 @@ function Result() {
               </p>
             </div>
           ) : (
-            <Table
-              responsive
-              striped
-              hover
-              className="mt-3"
-              style={{ backgroundColor: "rgba(255,255,255,0.6)" }}
-            >
-              {/** Table header */}
-              <thead
+            <div ref={ref}>
+              <Table
+                responsive
+                striped
+                hover
+                className="mt-3"
                 style={{
-                  backgroundColor: "#b9b9c4",
-                  position: "sticky",
-                  top: 0,
+                  backgroundColor: "rgba(255,255,255,0.6)",
                 }}
+                responsive={true}
+                bordered
               >
-                <tr style={{ fontSize: 20, fontWeight: 400 }}>
-                  <th>No.</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Answers</th>
-                </tr>
-              </thead>
-              <tbody>
-                {/** Render list of questions */}
-                {results.map((value, index) => {
-                  return (
-                    <tr>
-                      <td scope="row">{index + 1}</td>
-                      <td>{value.email}</td>
-                      <td>{value.phone}</td>
-                      <td>
+                {/** Table header */}
+                <thead
+                  style={{
+                    backgroundColor: "#b9b9c4",
+                    position: "sticky",
+                    top: 0,
+                  }}
+                >
+                  <tr style={{ fontSize: 20, fontWeight: 400 }}>
+                    <td
+                      rowspan="2"
+                      style={{ fontWeight: "bold", fontSize: "15px" }}
+                    >
+                      <FontAwesomeIcon icon={faSortNumericDown} />
+                    </td>
+                    <td
+                      rowspan="2"
+                      style={{ fontWeight: "bold", fontSize: "15px" }}
+                    >
+                      <FontAwesomeIcon icon={faMailBulk} />
+                      &nbsp; Email
+                    </td>
+                    <td
+                      rowspan="2"
+                      style={{
+                        fontWeight: "bold",
+                        fontSize: "15px",
+                      }}
+                    >
+                      <FontAwesomeIcon icon={faPhone} />
+                      &nbsp; Phone
+                    </td>
+
+                    <td
+                      style={{ fontWeight: "bold", fontSize: "15px" }}
+                      colspan={Object.keys(results[0].questions).length}
+                    >
+                      <FontAwesomeIcon icon={faQuestion} />
+                      &nbsp; Questions
+                    </td>
+                  </tr>
+
+                  <tr>
+                    {Object.keys(results[0].questions).map(function (
+                      key,
+                      index
+                    ) {
+                      return (
+                        <td style={{ fontWeight: "normal", fontSize: "15px" }}>
+                          <i>
+                            {index + 1}. {key}
+                          </i>
+                        </td>
+                      );
+                    })}
+                  </tr>
+                </thead>
+                <tbody>
+                  {/** Render list of questions */}
+                  {displayResults.map((value, index) => {
+                    return (
+                      <tr>
+                        <td scope="row">
+                          <u>{index + 1}</u>
+                        </td>
+                        <td style={{ fontWeight: "normal", fontSize: "15px" }}>
+                          <i>{value.email}</i>
+                        </td>
+                        <td
+                          style={{
+                            fontWeight: "normal",
+                            fontSize: "15px",
+                            //borderRightWidth: "1px",
+                            //borderRightColor: "grey",
+                          }}
+                        >
+                          <i>{value.phone}</i>
+                        </td>
+
                         {Object.keys(value.questions).map(function (
                           key,
                           index
                         ) {
                           return (
-                            <div>
-                              <b>
-                                {index + 1}. {key}
-                              </b>
+                            <td
+                              style={{ fontWeight: "normal", fontSize: "15px" }}
+                            >
                               <p>
                                 {Array.isArray(value.questions[key])
                                   ? value.questions[key]
@@ -112,15 +286,15 @@ function Result() {
                                       .join(", ")
                                   : value.questions[key]}
                               </p>
-                            </div>
+                            </td>
                           );
                         })}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </Table>
+            </div>
           )}
           <br></br>
         </Container>
